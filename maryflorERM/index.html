@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Maryflor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#16213a;--gold:#c4a06a;--gold2:#a8864f;--bg:#f7f5f1;--line:#e8e2d6;--ink:#16213a;--mut:#6b7385;--bad:#b3363f;--ok:#2a7d58}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 "Nunito Sans",system-ui,sans-serif;font-variant-numeric:tabular-nums}
+.app{display:flex;min-height:100vh}
+aside{width:220px;flex:none;background:#fff;border-right:1px solid var(--line);padding:18px 12px;position:sticky;top:0;height:100vh}
+.brand{display:flex;align-items:center;gap:10px;padding:0 8px 18px;font:700 1.55rem "Cormorant Garamond",Georgia,serif;color:var(--navy)}
+nav{display:flex;flex-direction:column;gap:2px}
+nav button{display:flex;align-items:center;gap:10px;background:none;color:var(--mut);border:0;border-radius:8px;padding:9px 10px;font-weight:600;font-size:.95rem;text-align:left}
+nav button svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+nav button:hover{background:#f4efe6}
+nav button[aria-current=page]{background:#f4efe6;color:var(--navy)}
+nav button[aria-current=page] svg{stroke:var(--gold2)}
+.col{flex:1;min-width:0}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:22px 28px 0;max-width:1100px;margin:0 auto}
+.tl{display:flex;align-items:center;gap:10px}.mlogo{display:none}
+.top h1{margin:0;font:700 2rem "Cormorant Garamond",Georgia,serif;color:var(--navy)}
+#act{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+main{max-width:1100px;margin:0 auto;padding:16px 28px 48px}
+h2{font:700 1rem "Nunito Sans",system-ui,sans-serif;margin:0 0 10px;color:var(--navy)}
+.card,details{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:16px;box-shadow:0 1px 2px rgba(22,33,58,.04)}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-bottom:16px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:2px;box-shadow:0 1px 2px rgba(22,33,58,.04)}
+.kpi .l{color:var(--mut);font-weight:600;font-size:.82rem}.kpi .n{font-size:1.65rem;font-weight:700;letter-spacing:-.01em}.kpi .s{color:var(--mut);font-size:.8rem}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:16px;margin-bottom:16px}.g2>.card{margin:0}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#fff}
+.seg button{background:none;color:var(--mut);border-radius:0;padding:7px 12px}.seg button[aria-pressed=true]{background:var(--navy);color:#fff}
+.ch{width:100%;height:auto;display:block}
+.hb{margin:10px 0}.hb>div:last-child{height:8px;background:#f0eadf;border-radius:99px;overflow:hidden}.hb i{display:block;height:100%;background:var(--gold)}
+.s2{margin:8px 0 4px;color:var(--mut)}
+.row{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border:0}.row small{display:block;color:var(--mut)}.row>div:first-child{min-width:0}
+form{display:grid;grid-template-columns:repeat(auto-fit,minmax(135px,1fr));gap:10px;align-items:end}
+form>button{grid-column:1/-1}
+label{display:grid;gap:3px;font-size:.82rem;color:var(--mut);font-weight:600}
+input,select{font:inherit;padding:9px 11px;border:1px solid var(--line);border-radius:8px;background:#fff;color:var(--ink);width:100%}
+button,a.btn{font:600 .9rem "Nunito Sans",system-ui,sans-serif;border:0;border-radius:8px;padding:9px 14px;background:var(--navy);color:#fff;cursor:pointer;text-decoration:none;display:inline-block}
+button.o,a.btn{background:#fff;color:var(--navy);border:1px solid var(--line)}
+button.x{background:none;color:var(--mut);padding:4px 8px;border:0}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.tag{font-style:normal;font-size:.74rem;padding:2px 8px;border-radius:99px;margin-left:6px;background:#efe6d6;color:#7a5f2e;font-weight:700;white-space:nowrap}
+.tag.bad{background:#f8e1e6;color:var(--bad)}.tag.ok{background:#dcefe5;color:var(--ok)}
+.empty{color:var(--mut);margin:4px 0}
+summary{cursor:pointer;font:700 1rem "Nunito Sans",system-ui,sans-serif;color:var(--navy)}
+details[open] summary{margin-bottom:12px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.r{text-align:right;white-space:nowrap}
+@media(max-width:859px){aside{position:fixed;top:auto;bottom:0;left:0;right:0;width:auto;height:auto;border:0;border-top:1px solid var(--line);padding:0 0 env(safe-area-inset-bottom,0px);z-index:5}.brand{display:none}nav{flex-direction:row;overflow-x:auto}nav button{flex:0 0 auto;min-width:72px;flex-direction:column;gap:2px;font-size:.72rem;border-radius:0;padding:9px 6px;align-items:center;white-space:nowrap}.sp{display:none}.top{padding:16px 16px 0}.top h1{font-size:1.6rem}main{padding:12px 14px 96px}.mlogo{display:flex}.kpis{grid-template-columns:1fr 1fr}}
+.sp{display:block;height:1px;background:var(--line);margin:8px 6px;flex:none}
+.ov{position:fixed;inset:0;background:rgba(22,33,58,.45);display:grid;place-items:center;z-index:20;padding:16px}
+.md{background:#fff;border-radius:12px;padding:18px;max-width:420px;max-height:90vh;overflow:auto;width:100%;box-shadow:0 10px 30px rgba(22,33,58,.25)}
+.md p{margin:0 0 12px;font-weight:600}.md .actions{justify-content:flex-end}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:var(--navy);color:#fff;padding:10px 16px;border-radius:10px;z-index:30;max-width:90vw}
+button:disabled{opacity:.4;cursor:default}
+.toast button{background:none;color:var(--gold);padding:0 0 0 14px;font-weight:700}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><symbol id="lg" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#fff" stroke="#c4a06a" stroke-width="2"/><path d="M26 19c2-7 7-9 11-9-1 6-5 10-11 9zM38 19c-2-7-7-9-11-9 1 6 5 10 11 9z" fill="#c4a06a"/><text x="32" y="40" text-anchor="middle" font-family="Cormorant Garamond,Georgia,serif" font-weight="700" font-size="17" fill="#16213a">M&amp;F</text><path d="M16 48q5-5 8 0t8 0 8 0 8 0" fill="none" stroke="#c4a06a" stroke-width="2"/></symbol></svg><div class="app">
+<aside><div class="brand"><svg width="40" height="40" aria-hidden="true"><use href="#lg"/></svg>Maryflor</div><nav id="nav"></nav></aside>
+<div class="col"><div class="top"><div class="tl"><span class="mlogo"><svg width="34" height="34" aria-hidden="true"><use href="#lg"/></svg></span><h1 id="ttl"></h1></div><div id="act"></div></div>
+<main id="v"></main></div></div>
+
+<script>
+const KEY = "maryflor_v2", E = { clientes: [], productos: [], ventas: [], paquetes: [], movs: [], panderos: [] };
+let S; try { S = { ...E, ...JSON.parse(localStorage.getItem(KEY) || "{}") }; } catch { S = { ...E }; }
+let tab = "inicio", rango = 30, pre = null, lab = "", hist = []; const OP = new Set(); const HK = "maryflor_hist";
+try { hist = JSON.parse(localStorage.getItem(HK) || "[]"); if (!Array.isArray(hist)) hist = []; } catch { hist = []; }
+const $ = s => document.querySelector(s);
+const uid = () => Math.random().toString(36).slice(2, 9) + Date.now().toString(36).slice(-3);
+const iso = d => new Date(d - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 10);
+const hoy = () => iso(new Date());
+const dias = n => { const d = new Date(); d.setDate(d.getDate() - n); return iso(d); };
+const bars = d => { const W = 600, H = 150, mx = Math.max(...d.map(x => x.v), 1), bw = W / d.length, k = Math.ceil(d.length / 8);
+  return `<svg class="ch" viewBox="0 0 ${W} ${H + 22}" role="img">${d.map((x, i) => { const h = Math.max(x.v / mx * H, x.v ? 3 : 1);
+    return `<g><title>${x.t}: ${m(x.v)}</title><rect x="${i * bw + bw * .15}" y="${H - h}" width="${bw * .7}" height="${h}" rx="3" fill="${i === d.length - 1 ? "#c4a06a" : "#16213a"}" opacity="${x.v ? 1 : .15}"/>${i % k === 0 || i === d.length - 1 ? `<text x="${i * bw + bw / 2}" y="${H + 16}" text-anchor="middle" font-size="11" fill="#6b7385">${x.l}</text>` : ""}</g>`; }).join("")}</svg>`; };
+const fd = d => d ? d.split("-").reverse().join("/") : "";
+const m = n => "S/ " + (+n || 0).toLocaleString("es-PE", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const sum = (a, f) => a.reduce((t, x) => t + f(x), 0);
+const pag = v => sum(v.abonos, a => a.m), saldo = v => Math.max(0, v.total - pag(v));
+const util = v => v.cant * (v.precio - v.costo) + (v.recargo || 0);
+const TIPO = { contado: "Contado", credito: "Crédito", pandero: "Pandero", sorteo: "Sorteo" };
+const MOV = { compra: "Compra de mercadería", gasto: "Gasto", prestamo: "Préstamo recibido", pagoPrest: "Pago de préstamo", socios: "Pago a socios", ingreso: "Otro ingreso", ajuste: "Ajuste de caja" };
+const fresh = () => ({ clientes: [], productos: [], ventas: [], paquetes: [], movs: [], panderos: [] });
+const LBL = { venta: "Venta registrada", paquete: "Paquete creado", item: "Producto agregado al paquete", stock: "Producto agregado al stock", cli: "Cliente guardado", mov: "Movimiento guardado", ajuste: "Caja ajustada", pandero: "Pandero creado", abono: "Abono registrado", llego: "Paquete marcado como llegado", delitem: "Producto quitado del paquete", sortear: "Sorteo realizado", borrarTodo: "Todos los datos borrados" };
+const persist = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch { if (!avisado) { avisado = true; toast("Aquí no se pueden guardar datos: se perderán al cerrar. Abre el archivo directamente en tu navegador."); } } };
+const histSave = () => { for (let n = hist.length; ; n = n >> 1) { try { localStorage.setItem(HK, JSON.stringify(hist.slice(hist.length - n))); return; } catch { if (!n) return; } } };
+const save = () => { let nuevo = false; const l = lab || "Cambio";
+  if (pre !== null && JSON.stringify(S) !== pre) { hist.push({ t: Date.now(), label: l, snap: pre }); if (hist.length > 25) hist.shift(); histSave(); nuevo = true; }
+  pre = null; lab = ""; persist(); render(); if (nuevo) toast(l + " ", true); };
+const restore = i => { const x = hist[i]; if (!x) return; S = { ...fresh(), ...JSON.parse(x.snap) }; hist.splice(i); histSave(); pre = null; persist(); render(); toast("Deshecho: " + x.label); };
+const toast = (t, u) => { document.querySelectorAll(".toast").forEach(x => x.remove()); const d = document.createElement("div"); d.className = "toast"; d.textContent = t; if (u) { const b = document.createElement("button"); b.dataset.a = "undo"; b.textContent = "Deshacer"; d.appendChild(b); } document.body.appendChild(d); setTimeout(() => d.remove(), 6000); };
+const dlg = (msg, input) => new Promise(res => { const o = document.createElement("div"); o.className = "ov";
+  o.innerHTML = `<div class="md" role="dialog" aria-modal="true"><p>${msg}</p>${input ? '<input type="number" min="0" step="0.01" id="mi">' : ""}<div class="actions"><button class="o" data-k="0">Cancelar</button><button data-k="1">Aceptar</button></div></div>`;
+  document.body.appendChild(o); const i = o.querySelector("#mi"); (i || o.querySelector('[data-k="1"]')).focus();
+  const fin_ = v => { o.remove(); res(v); };
+  o.onclick = e => { const k = e.target.dataset.k; if (k === "1") fin_(input ? i.value : true); else if (k === "0" || e.target === o) fin_(null); };
+  o.onkeydown = e => { if (e.key === "Enter") o.querySelector('[data-k="1"]').click(); if (e.key === "Escape") fin_(null); }; });
+let avisado = false;
+const mov = (tipo, concepto, monto, cat) => S.movs.push({ id: uid(), fecha: hoy(), tipo, concepto, monto: +monto || 0, cat: cat || "" });
+const cliente = n => { n = n.trim(); let c = S.clientes.find(x => x.nombre.toLowerCase() === n.toLowerCase()); if (!c) S.clientes.push(c = { id: uid(), nombre: n, tel: "" }); return c; };
+const upsert = (n, marca, costo, precio, c) => { const p = S.productos.find(x => x.nombre.toLowerCase() === n.toLowerCase()); if (p) { p.stock += c; p.costo = costo; if (precio) p.precio = precio; } else S.productos.push({ id: uid(), nombre: n, marca, costo, precio, stock: c }); };
+const wa = t => { t = t.replace(/\D/g, ""); return t.length === 9 ? "51" + t : t; };
+const deudores = () => { const g = {}; S.ventas.filter(v => saldo(v) > 0).forEach(v => (g[v.cliente] = g[v.cliente] || { n: v.cliente, vs: [] }).vs.push(v));
+  return Object.values(g).map(d => ({ ...d, tot: sum(d.vs, saldo), venc: d.vs.some(v => v.vence && v.vence < hoy()) })).sort((a, b) => b.tot - a.tot); };
+const fin = () => { const mv = k => sum(S.movs.filter(x => x.tipo === k), x => x.monto), otros = mv("ingreso"), gastos = mv("gasto");
+  return { caja: sum(S.ventas, pag) + mv("prestamo") + otros - gastos - mv("pagoPrest") - mv("socios") - mv("compra") + mv("ajuste"), neta: sum(S.ventas, util) + otros - gastos, deuda: mv("prestamo") - mv("pagoPrest") }; };
+const del = (c, id) => `<button class="x" data-a="del" data-c="${c}" data-id="${id}" aria-label="Eliminar">✕</button>`;
+const ed = (c, id) => `<button class="x" data-a="edit" data-c="${c}" data-id="${id}" aria-label="Editar">✎</button>`;
+const EF = { productos: [["nombre", "Producto", "text"], ["marca", "Marca", "text"], ["stock", "En stock", "number"], ["costo", "Costo unit. (S/)", "number"], ["precio", "Precio venta (S/)", "number"]],
+  clientes: [["nombre", "Nombre", "text"], ["tel", "Teléfono (WhatsApp)", "tel"]],
+  ventas: [["cliente", "Cliente", "text"], ["producto", "Producto", "text"], ["cant", "Cantidad", "number"], ["precio", "Precio unit. (S/)", "number"], ["costo", "Costo unit. (S/)", "number"], ["recargo", "Recargo (S/)", "number"], ["fecha", "Fecha", "date"], ["vence", "Plazo para pagar", "date"]],
+  movs: [["concepto", "Concepto", "text"], ["monto", "Monto (S/)", "number"], ["fecha", "Fecha", "date"]],
+  paquetes: [["nombre", "Nombre", "text"], ["fecha", "Llegada estimada", "date"]] };
+const fdlg = (tit, F, v) => new Promise(res => { const o = document.createElement("div"); o.className = "ov";
+  o.innerHTML = `<div class="md" role="dialog" aria-modal="true"><p>${esc(tit)}</p><form>${F.map(([k, l, t], i) => `<label>${l}<input name="${k}" type="${t}"${t === "number" ? ' min="0" step="' + (k === "stock" || k === "cant" ? 1 : .01) + '"' : ""}${i === 0 ? " required" : ""} value="${esc(v[k] ?? "")}"></label>`).join("")}<div class="actions" style="grid-column:1/-1"><button type="button" class="o" data-k="0">Cancelar</button><button>Guardar</button></div></form></div>`;
+  document.body.appendChild(o); o.querySelector("input").focus();
+  o.onclick = e => { if (e.target === o || e.target.dataset.k === "0") { o.remove(); res(null); } };
+  o.querySelector("form").onsubmit = e => { e.preventDefault(); const r = Object.fromEntries(new FormData(e.target)); o.remove(); res(r); };
+  o.onkeydown = e => { if (e.key === "Escape") { o.remove(); res(null); } }; });
+
+// ---------- PANTALLAS ----------
+const V = {
+  inicio() {
+    const R = rango, d = deudores(), f = fin(), hS = hoy(), a = dias(R - 1), pa = dias(2 * R - 1), pb = dias(R);
+    const vp = (x, y) => S.ventas.filter(v => v.fecha >= x && v.fecha <= y), cp = (x, y) => S.movs.filter(v => v.tipo === "compra" && v.fecha >= x && v.fecha <= y);
+    const V1 = vp(a, hS), V0 = vp(pa, pb), C1 = cp(a, hS), C0 = cp(pa, pb);
+    const t1 = sum(V1, x => x.total), t0 = sum(V0, x => x.total), u1 = sum(V1, util), u0 = sum(V0, util), i1 = sum(C1, x => x.monto), i0 = sum(C0, x => x.monto);
+    const dl = (x, y, n) => y ? `<i class="tag ${n ? "" : x >= y ? "ok" : "bad"}">${x >= y ? "▲" : "▼"} ${Math.abs((x - y) / y * 100).toFixed(0)}%</i>` : "";
+    const kpi = (l, n, s, e = "") => `<div class="kpi"><span class="l">${l}</span><b class="n">${n}</b><span class="s">${s}${e}</span></div>`;
+    const dia = Array.from({ length: R }, (_, k) => { const x = dias(R - 1 - k); return { v: sum(S.ventas.filter(v => v.fecha === x), v => v.total), l: fd(x).slice(0, 5), t: fd(x) }; });
+    const lu = new Date(); lu.setDate(lu.getDate() - (lu.getDay() + 6) % 7);
+    const sem = Array.from({ length: 8 }, (_, k) => { const s = new Date(lu); s.setDate(s.getDate() - 7 * (7 - k)); const e = new Date(s); e.setDate(e.getDate() + 6); const x = iso(s), y = iso(e);
+      return { v: sum(S.ventas.filter(v => v.fecha >= x && v.fecha <= y), v => v.total), l: fd(x).slice(0, 5), t: "Semana del " + fd(x) + " al " + fd(y) }; });
+    const cat = {}; C1.forEach(x => cat[x.cat || "Otros"] = (cat[x.cat || "Otros"] || 0) + x.monto);
+    const cats = Object.entries(cat).sort((p, q) => q[1] - p[1]), top = [...C1].sort((p, q) => q.monto - p.monto).slice(0, 4);
+    const cam = S.paquetes.filter(p => p.estado === "camino").sort((p, q) => (p.fecha || "9").localeCompare(q.fecha || "9"));
+    const eta = p => { if (!p.fecha) return '<i class="tag">sin fecha</i>'; const n = Math.round((new Date(p.fecha) - new Date(hS)) / 864e5);
+      return n < 0 ? `<i class="tag bad">atrasado ${-n} d</i>` : `<i class="tag ${n <= 3 ? "ok" : ""}">${n === 0 ? "llega hoy" : n === 1 ? "mañana" : "en " + n + " días"}</i>`; };
+    return `
+    <div class="kpis">
+      ${kpi("Ventas · " + R + " días", m(t1), "Hoy " + m(sum(S.ventas.filter(x => x.fecha === hS), x => x.total)) + " ", dl(t1, t0))}
+      ${kpi("Utilidad", m(u1), "Para cada uno " + m(u1 / 2) + " ", dl(u1, u0))}
+      ${kpi("Invertido", m(i1), C1.length + " compra(s) ", dl(i1, i0, 1))}
+      ${kpi("Por cobrar", m(sum(d, x => x.tot)), d.length + " cliente(s)")}
+      ${kpi("Dinero en caja", m(f.caja), "Deuda préstamos " + m(f.deuda))}
+    </div>
+    <div class="g2"><div class="card"><h2>Ventas por día</h2>${bars(dia)}</div><div class="card"><h2>Ventas por semana</h2>${bars(sem)}<p class="s2">Esta semana: <b>${m(sem[7].v)}</b> · semana pasada: <b>${m(sem[6].v)}</b></p></div></div>
+    <div class="g2"><div class="card"><h2>En qué invertimos</h2>${cats.length ? cats.map(([k, v]) => `<div class="hb"><div class="row" style="padding:0 0 4px;border:0"><span>${esc(k)}</span><b>${m(v)} <span style="color:var(--mut);font-weight:600">${(v / i1 * 100).toFixed(0)}%</span></b></div><div><i style="width:${v / cats[0][1] * 100}%"></i></div></div>`).join("") + '<p class="s2">Mayores compras</p>' + top.map(x => `<div class="row"><div>${esc(x.concepto.replace("Compra: ", ""))}<small>${fd(x.fecha)}</small></div><b>${m(x.monto)}</b></div>`).join("") : '<p class="empty">Sin compras en este período.</p>'}</div>
+    <div class="card"><h2>Próximos pedidos</h2>${cam.length ? cam.map(p => `<div class="row"><div>${esc(p.nombre)}<i class="tag">${esc(p.origen)}</i><small>${p.items.length} producto(s) · ${m(sum(p.items, i => i.cant * i.costo))}${p.items.some(i => i.para) ? " · con pedidos de clientes" : ""}</small></div>${eta(p)}</div>`).join("") + '<div class="actions"><button class="o" data-t="paquetes">Ver paquetes</button></div>' : '<p class="empty">No hay paquetes pendientes.</p>'}</div></div>
+    <div class="card"><h2>Quién nos debe</h2>${d.length ? d.slice(0, 5).map(x => `<div class="row"><div>${esc(x.n)}${x.venc ? '<i class="tag bad">plazo vencido</i>' : ""}</div><b>${m(x.tot)}</b></div>`).join("") + '<div class="actions"><button class="o" data-t="cobros">Ver cobros</button></div>' : '<p class="empty">Nadie debe nada por ahora.</p>'}</div>`;
+  },
+  ventas() {
+    const L = [...S.ventas].reverse().slice(0, 25);
+    return `<datalist id="lc">${S.clientes.map(c => `<option value="${esc(c.nombre)}">`).join("")}</datalist><datalist id="lp">${S.productos.map(p => `<option value="${esc(p.nombre)}">`).join("")}</datalist>
+    <div class="card"><h2>Nueva venta</h2><form data-f="venta">
+      <label>Cliente<input name="cliente" list="lc" required autocomplete="off"></label>
+      <label>Producto<input name="producto" list="lp" required autocomplete="off"></label>
+      <label>Cantidad<input name="cant" type="number" min="1" value="1" required></label>
+      <label>Precio unitario (S/)<input name="precio" type="number" min="0" step="0.01" required></label>
+      <label>Costo unitario (S/)<input name="costo" type="number" min="0" step="0.01" value="0"></label>
+      <label>Forma de pago<select name="tipo">${Object.entries(TIPO).map(([k, v]) => `<option value="${k}">${v}</option>`).join("")}</select></label>
+      <label>Pagó ahora (S/)<input name="pago" type="number" min="0" step="0.01" placeholder="Automático"></label>
+      <label>Recargo por crédito (S/)<input name="recargo" type="number" min="0" step="0.01" value="0"></label>
+      <label>Fecha de la venta<input name="fecha" type="date" value="${hoy()}"></label>
+      <label>Plazo para pagar<input name="vence" type="date"></label>
+      <button>Guardar venta</button></form></div>
+    <div class="card"><h2>Últimas ventas</h2>${L.length ? L.map(v => `<div class="row"><div>${esc(v.producto)}${v.cant > 1 ? " ×" + v.cant : ""}<small>${esc(v.cliente)} · ${fd(v.fecha)} · ${TIPO[v.tipo]}</small></div><div class="r"><b>${m(v.total)}</b><small>${saldo(v) > 0 ? "falta " + m(saldo(v)) : '<i class="tag ok">Pagado</i>'}</small></div>${ed("ventas", v.id)}${del("ventas", v.id)}</div>`).join("") : '<p class="empty">Aún no registras ventas.</p>'}</div>`;
+  },
+  cobros() {
+    const d = deudores();
+    if (!d.length) return `<div class="card"><h2>Cobros</h2><p class="empty">Nadie te debe nada. ¡Todo al día!</p></div>`;
+    return d.map(x => { const c = S.clientes.find(k => k.nombre === x.n) || {};
+      return `<div class="card"><div class="row"><h2 style="margin:0">${esc(x.n)}${x.venc ? '<i class="tag bad">plazo vencido</i>' : ""}</h2><b class="serif" style="font-size:1.6rem">${m(x.tot)}</b></div>
+      ${x.vs.map(v => `<div class="row"><div>${esc(v.producto)}<small>${fd(v.fecha)}${v.vence ? " · plazo " + fd(v.vence) : ""}${pag(v) ? " · abonó " + m(pag(v)) : ""}</small></div><span>${m(saldo(v))}</span></div>`).join("")}
+      <div class="actions"><button data-a="abono" data-n="${esc(x.n)}">Registrar abono</button>${c.tel ? `<a class="btn" target="_blank" rel="noopener" href="https://wa.me/${wa(c.tel)}?text=${encodeURIComponent("Hola " + x.n + ", te recordamos tu saldo pendiente de " + m(x.tot) + " con Maryflor. ¡Gracias!")}">Recordar por WhatsApp</a>` : ""}</div></div>`; }).join("");
+  },
+  paquetes() {
+    const cam = S.paquetes.filter(p => p.estado === "camino"), ll = S.paquetes.filter(p => p.estado !== "camino");
+    return `<datalist id="lc">${S.clientes.map(c => `<option value="${esc(c.nombre)}">`).join("")}</datalist>
+    <div class="card"><h2>Nuevo paquete</h2><form data-f="paquete">
+      <label>Nombre (ej. Temu paquete M)<input name="nombre" required></label>
+      <label>Origen<select name="origen"><option>Temu</option><option>Natura</option><option>Avon</option><option>Yanbal</option><option>Proveedor local</option><option>Otro</option></select></label>
+      <label>Llegada estimada<input name="fecha" type="date"></label>
+      <button>Crear paquete</button></form></div>
+    ${cam.map(p => `<div class="card"><div class="row"><h2 style="margin:0">${esc(p.nombre)}<i class="tag">${esc(p.origen)}</i></h2><b class="serif" style="font-size:1.4rem">${m(sum(p.items, i => i.cant * i.costo))}</b></div>
+      ${p.items.map(i => `<div class="row"><div>${esc(i.producto)} ×${i.cant}<small>costo ${m(i.costo)} · precio ${m(i.precio)}${i.para ? " · para " + esc(i.para) : ""}</small></div><button class="x" data-a="delitem" data-p="${p.id}" data-id="${i.id}" aria-label="Quitar">✕</button></div>`).join("") || '<p class="empty">Aún no agregas productos.</p>'}
+      <form data-f="item" style="margin-top:10px"><input type="hidden" name="pid" value="${p.id}">
+        <label>Producto<input name="producto" required></label><label>Cant.<input name="cant" type="number" min="1" value="1"></label>
+        <label>Costo unit.<input name="costo" type="number" min="0" step="0.01"></label><label>Precio venta<input name="precio" type="number" min="0" step="0.01"></label>
+        <label>Para (cliente, opcional)<input name="para" list="lc" autocomplete="off"></label><button class="o">Agregar producto</button></form>
+      <div class="actions"><button data-a="llego" data-id="${p.id}">Ya llegó</button><button class="o" data-a="edit" data-c="paquetes" data-id="${p.id}">Editar</button><button class="o" data-a="del" data-c="paquetes" data-id="${p.id}">Eliminar paquete</button></div></div>`).join("") || '<div class="card"><p class="empty">No hay paquetes por llegar.</p></div>'}
+    ${ll.length ? `<div class="card"><h2>Ya llegaron</h2>${ll.map(p => `<div class="row"><div>${esc(p.nombre)}<i class="tag ok">${esc(p.origen)}</i><small>${p.items.length} producto(s) · llegó ${fd(p.llego)}</small></div>${ed("paquetes", p.id)}${del("paquetes", p.id)}</div>`).join("")}</div>` : ""}`;
+  },
+  stock() {
+    return `<div class="card"><h2>Agregar al stock</h2><form data-f="stock"><label>Producto<input name="nombre" required></label><label>Marca<select name="marca"><option>Yanbal</option><option>Avon</option><option>Natura/Ekos</option><option>Victoria’s Secret</option><option>Temu</option><option>Otro</option></select></label>
+      <label>Cantidad<input name="cant" type="number" min="1" value="1" required></label><label>Costo unit. (S/)<input name="costo" type="number" min="0" step="0.01" required></label><label>Precio venta (S/)<input name="precio" type="number" min="0" step="0.01" required></label><label>¿Es una compra nueva?<select name="compra"><option value="no">No, ya lo tenía</option><option value="si">Sí, la acabo de comprar</option></select></label><button>Agregar al stock</button></form></div>
+    <div class="card"><h2>Productos en stock</h2><p class="s2">Inventario: ${sum(S.productos, p => p.stock)} unidades · a costo ${m(sum(S.productos, p => p.stock * p.costo))} · a precio de venta ${m(sum(S.productos, p => p.stock * p.precio))}</p>${S.productos.map(p => `<div class="row"><div>${esc(p.nombre)}${p.stock < 1 ? '<i class="tag bad">agotado</i>' : ""}<small>${esc(p.marca)} · costo ${m(p.costo)} · precio ${m(p.precio)}</small></div><div class="r"><b>${p.stock}</b><small>en stock</small></div>${ed("productos", p.id)}${del("productos", p.id)}</div>`).join("") || '<p class="empty">Aún no hay productos en stock.</p>'}</div>`;
+  },
+  clientes() {
+    return `<div class="card"><h2>Nuevo cliente</h2><form data-f="cli"><label>Nombre<input name="nombre" required></label><label>Teléfono (WhatsApp)<input name="tel" inputmode="tel"></label><button>Guardar cliente</button></form></div>
+    <div class="card"><h2>Clientes (${S.clientes.length})</h2>${S.clientes.map(c => { const d = sum(S.ventas.filter(v => v.cliente === c.nombre), saldo); return `<div class="row"><div>${esc(c.nombre)}${d > 0 ? `<i class="tag bad">debe ${m(d)}</i>` : ""}<small>${esc(c.tel) || "sin teléfono"}</small></div>${ed("clientes", c.id)}${del("clientes", c.id)}</div>`; }).join("") || '<p class="empty">Aún no hay clientes.</p>'}</div>`;
+  },
+  caja() {
+    const pos = { prestamo: 1, ingreso: 1 }, f = fin();
+    return `<div class="kpis"><div class="kpi"><span class="l">Dinero en caja</span><b class="n">${m(f.caja)}</b></div><div class="kpi"><span class="l">Deuda por préstamos</span><b class="n">${m(f.deuda)}</b></div></div>
+    <div class="card"><h2>Dinero que hay en caja</h2><p class="s2">Escribe cuánto dinero tienen hoy en caja. La app guarda la diferencia como un ajuste (aparece en Movimientos y se puede deshacer).</p><form data-f="ajuste"><label>Dinero en caja (S/)<input name="real" type="number" step="0.01" value="${(+f.caja).toFixed(2)}" required></label><button>Guardar dinero en caja</button></form></div>
+    <div class="card"><h2>Registrar movimiento</h2><form data-f="mov"><label>Tipo<select name="tipo">${Object.entries(MOV).filter(([k]) => k !== "compra" && k !== "ajuste").map(([k, v]) => `<option value="${k}">${v}</option>`).join("")}</select></label><label>Concepto<input name="concepto" required></label><label>Monto (S/)<input name="monto" type="number" min="0" step="0.01" required></label><button>Guardar movimiento</button></form></div>
+    <div class="card"><h2>Movimientos</h2>${[...S.movs].reverse().slice(0, 40).map(x => { const up = x.tipo === "ajuste" ? x.monto >= 0 : pos[x.tipo]; return `<div class="row"><div>${esc(x.concepto)}<small>${fd(x.fecha)} · ${MOV[x.tipo]}</small></div><b style="color:var(${up ? "--ok" : "--bad"})">${up ? "+" : "−"}${m(Math.abs(x.monto))}</b>${x.tipo === "ajuste" ? "" : ed("movs", x.id)}${del("movs", x.id)}</div>`; }).join("") || '<p class="empty">Aún no hay movimientos.</p>'}</div>`;
+  },
+  pandero() {
+    return `<div class="card"><h2>Nuevo pandero</h2><form data-f="pandero"><label>Nombre<input name="nombre" required></label><label>Cuota semanal (S/)<input name="cuota" type="number" min="0" step="0.01" value="10"></label><label style="grid-column:1/-1">Participantes (separados por coma)<input name="parts" required></label><button>Crear pandero</button></form></div>
+    ${S.panderos.map(p => `<div class="card"><div class="row"><h2 style="margin:0">${esc(p.nombre)}</h2><span>${p.parts.length} personas · ${m(p.cuota)} semanal c/u</span></div><p>Ya ganaron: ${p.ganadores.map((g, i) => `${i + 1}. ${esc(g)}`).join(" · ") || "nadie todavía"}</p><p class="s2">Faltan: ${esc(p.parts.filter(x => !p.ganadores.includes(x)).join(", ")) || "nadie, ¡terminó!"}</p><div class="actions"><button data-a="sortear" data-id="${p.id}">Sortear semana ${p.ganadores.length + 1}</button>${del("panderos", p.id)}</div></div>`).join("") || '<div class="card"><p class="empty">Aún no hay panderos.</p></div>'}`;
+  },
+  historial() {
+    return `<div class="card"><h2>Historial de cambios</h2><p class="s2">Cada cambio queda guardado. “Volver aquí” regresa al estado anterior a ese cambio (se deshace ese y todos los posteriores).</p>${hist.map((x, i) => ({ x, i })).reverse().map(({ x, i }) => `<div class="row"><div>${esc(x.label)}<small>${new Date(x.t).toLocaleString("es-PE", { dateStyle: "short", timeStyle: "short" })}</small></div><button class="o" data-a="volver" data-id="${i}">Volver aquí</button></div>`).join("") || '<p class="empty">Aún no hay cambios que deshacer.</p>'}</div>`;
+  },
+  copia() {
+    return `<div class="card"><h2>Copia de seguridad</h2><p class="s2">Tus datos se guardan en este dispositivo. Descarga una copia con frecuencia; con ella puedes recuperarlos o llevarlos a otro dispositivo.</p><div class="actions"><button data-a="exp">Descargar copia</button><button class="o" data-a="imp">Cargar copia</button><input type="file" id="imp" accept=".json" hidden></div></div>
+    <div class="card"><h2>Borrar todo</h2><p class="s2">Borra todos los datos de la app. Puedes deshacerlo desde el Historial.</p><div class="actions"><button class="o" data-a="borrarTodo">Borrar todos los datos</button></div></div>`;
+  }
+};
+
+const TIT = { inicio: "Inicio", ventas: "Ventas", cobros: "Cobros", paquetes: "Paquetes", stock: "Stock", clientes: "Clientes", caja: "Caja y préstamos", pandero: "Pandero", historial: "Historial de cambios", copia: "Copia de seguridad" };
+const NL = { caja: "Caja", historial: "Historial", copia: "Copia" };
+const IC = { inicio: "M3 11l9-8 9 8M5 10v10h14V10", ventas: "M5 20V10M12 20V4M19 20v-7", cobros: "M3 7h18v12H3zM3 7l3-3h12l3 3M16 13h2", paquetes: "M3 7l9-4 9 4v10l-9 4-9-4zM3 7l9 4 9-4M12 11v10",
+  stock: "M4 7h16v13H4zM9 7V4h6v3M9 12h6", clientes: "M16 20v-1a4 4 0 00-4-4H7a4 4 0 00-4 4v1M9.5 11a3.5 3.5 0 100-7 3.5 3.5 0 000 7M21 20v-1a4 4 0 00-3-3.9M16 4.1a3.5 3.5 0 010 6.8",
+  caja: "M12 2v20M17 6H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6", pandero: "M21 12a9 9 0 11-3-6.7L21 8M21 3v5h-5", historial: "M12 7v5l3 2M21 12a9 9 0 11-18 0 9 9 0 0118 0z", copia: "M12 3v12m0 0l-4-4m4 4l4-4M4 21h16" };
+function render() {
+  $("#nav").innerHTML = Object.keys(TIT).map(k => `${k === "stock" ? '<i class="sp"></i>' : ""}<button data-t="${k}"${k === tab ? ' aria-current="page"' : ""}><svg viewBox="0 0 24 24"><path d="${IC[k]}"/></svg>${NL[k] || TIT[k]}</button>`).join("");
+  $("#ttl").textContent = TIT[tab];
+  $("#act").innerHTML = (tab === "inicio" ? `<div class="seg">${[7, 30, 90].map(n => `<button data-r="${n}" aria-pressed="${n === rango}">${n} días</button>`).join("")}</div>` : "") + `<button class="o" data-a="undo"${hist.length ? "" : " disabled"} title="${hist.length ? esc(hist[hist.length - 1].label) : "Nada que deshacer"}">↶ Deshacer</button>` + (tab === "inicio" ? '<button data-t="ventas">+ Nueva venta</button>' : "");
+  $("#v").innerHTML = V[tab]();
+}
+
+// ---------- FORMULARIOS ----------
+const H = {
+  venta: f => { const cant = +f.cant, precio = +f.precio, rec = +f.recargo || 0, total = cant * precio + rec, c = cliente(f.cliente);
+    const p = S.productos.find(x => x.nombre.toLowerCase() === f.producto.trim().toLowerCase()); if (p) p.stock = Math.max(0, p.stock - cant);
+    const ab = f.pago !== "" ? +f.pago : (f.tipo === "contado" || f.tipo === "sorteo" ? total : 0);
+    S.ventas.push({ id: uid(), fecha: f.fecha || hoy(), cliente: c.nombre, producto: f.producto.trim(), cant, precio, costo: +f.costo || 0, recargo: rec, total, tipo: f.tipo, vence: f.vence, abonos: ab ? [{ f: f.fecha || hoy(), m: Math.min(ab, total) }] : [] }); },
+  paquete: f => S.paquetes.push({ id: uid(), nombre: f.nombre.trim(), origen: f.origen, fecha: f.fecha, estado: "camino", items: [] }),
+  item: f => { const p = S.paquetes.find(x => x.id === f.pid), c = +f.cant || 1, cs = +f.costo || 0;
+    p.items.push({ id: uid(), producto: f.producto.trim(), cant: c, costo: cs, precio: +f.precio || 0, para: f.para.trim() }); mov("compra", `Compra: ${f.producto.trim()} (${p.nombre})`, c * cs, p.origen); },
+  stock: f => { const c = +f.cant, cs = +f.costo; upsert(f.nombre.trim(), f.marca, cs, +f.precio, c); if (f.compra === "si") mov("compra", "Compra: " + f.nombre.trim(), c * cs, f.marca); },
+  cli: f => { cliente(f.nombre).tel = f.tel.trim(); },
+  mov: f => mov(f.tipo, f.concepto.trim(), f.monto),
+  ajuste: f => { const d = Math.round((+f.real - fin().caja) * 100) / 100; if (d) mov("ajuste", "Ajuste de caja (quedó en " + m(+f.real) + ")", d); },
+  pandero: f => S.panderos.push({ id: uid(), nombre: f.nombre.trim(), cuota: +f.cuota, parts: f.parts.split(",").map(s => s.trim()).filter(Boolean), ganadores: [] })
+};
+document.addEventListener("submit", e => { const k = e.target.dataset.f; if (!k) return; e.preventDefault(); pre = JSON.stringify(S); lab = LBL[k] || "Cambio"; H[k](Object.fromEntries(new FormData(e.target))); e.target.reset(); save(); });
+document.addEventListener("input", e => { const f = e.target.form; if (e.target.name !== "producto" || f?.dataset.f !== "venta") return;
+  const p = S.productos.find(x => x.nombre.toLowerCase() === e.target.value.trim().toLowerCase()); if (p) { f.elements.precio.value = p.precio; f.elements.costo.value = p.costo; } });
+document.addEventListener("toggle", e => { const d = e.target; if (d.dataset && d.dataset.k) d.open ? OP.add(d.dataset.k) : OP.delete(d.dataset.k); }, true);
+
+// ---------- ACCIONES ----------
+document.addEventListener("click", async e => {
+  const r = e.target.closest("[data-r]"); if (r) { rango = +r.dataset.r; render(); return; }
+  const t = e.target.closest("[data-t]"); if (t) { tab = t.dataset.t; render(); scrollTo(0, 0); return; }
+  const b = e.target.closest("[data-a]"); if (!b) return; const { a, c, id, n, p } = b.dataset; if (a !== "undo" && a !== "exp" && a !== "imp" && a !== "volver") { pre = JSON.stringify(S); lab = LBL[a] || "Cambio"; }
+  if (a === "del") { const it = S[c].find(x => x.id === id), nom = it?.nombre || it?.producto || it?.concepto || "este registro"; if (await dlg("¿Eliminar " + esc(nom) + "? Podrás deshacerlo desde el Historial.")) { lab = "Eliminado: " + nom; S[c] = S[c].filter(x => x.id !== id); save(); } }
+  if (a === "edit") { const it = S[c].find(x => x.id === id); if (!it) return; const nm = x => x.nombre || x.producto || x.concepto, r = await fdlg("Editar: " + nm(it), EF[c], it); if (!r) return;
+    const old = it.nombre; EF[c].forEach(([k, , t]) => { it[k] = t === "number" ? +r[k] || 0 : r[k].trim(); });
+    if (c === "clientes" && old !== it.nombre) { S.ventas.forEach(v => { if (v.cliente === old) v.cliente = it.nombre; }); S.paquetes.forEach(k => k.items.forEach(i => { if (i.para === old) i.para = it.nombre; })); }
+    if (c === "ventas") { it.cliente = cliente(it.cliente).nombre; it.total = it.cant * it.precio + it.recargo; }
+    lab = "Editado: " + nm(it); save(); }
+  if (a === "delitem") { const k = S.paquetes.find(x => x.id === p); k.items = k.items.filter(x => x.id !== id); save(); }
+  if (a === "abono") { const vs = S.ventas.filter(v => v.cliente === n && saldo(v) > 0).sort((x, y) => x.fecha.localeCompare(y.fecha)), deb = sum(vs, saldo);
+    let r = parseFloat(await dlg(`¿Cuánto abonó ${esc(n)}? Debe ${m(deb)}`, true)); if (!(r > 0)) return;
+    vs.forEach(v => { const x = Math.min(r, saldo(v)); if (x > 0) { v.abonos.push({ f: hoy(), m: x }); r -= x; } }); save(); }
+  if (a === "llego") { const k = S.paquetes.find(x => x.id === id);
+    k.items.forEach(i => { if (i.para) S.ventas.push({ id: uid(), fecha: hoy(), cliente: cliente(i.para).nombre, producto: i.producto, cant: i.cant, precio: i.precio, costo: i.costo, recargo: 0, total: i.cant * i.precio, tipo: "credito", vence: "", abonos: [] }); else upsert(i.producto, k.origen, i.costo, i.precio, i.cant); });
+    k.estado = "llego"; k.llego = hoy(); save(); }
+  if (a === "sortear") { const k = S.panderos.find(x => x.id === id), libres = k.parts.filter(x => !k.ganadores.includes(x));
+    if (!libres.length) return toast("Todos ya ganaron. El pandero terminó."); k.ganadores.push(libres[Math.floor(Math.random() * libres.length)]); save(); }
+  if (a === "undo") restore(hist.length - 1);
+  if (a === "volver") { const x = hist[+id]; if (x && await dlg("¿Volver a antes de «" + esc(x.label) + "»? Se deshará eso y todo lo posterior.")) restore(+id); }
+  if (a === "borrarTodo" && await dlg("Se borrarán TODOS los datos de la app. Podrás deshacerlo desde el Historial. ¿Continuar?")) { S = fresh(); save(); }
+  if (a === "exp") { const l = document.createElement("a"); l.href = URL.createObjectURL(new Blob([JSON.stringify(S)], { type: "application/json" })); l.download = "maryflor-copia-" + hoy() + ".json"; l.click(); }
+  if (a === "imp") $("#imp").click();
+});
+document.addEventListener("change", e => { if (e.target.id !== "imp") return; const r = new FileReader(); r.onload = () => { try { pre = JSON.stringify(S); lab = "Copia cargada"; S = { ...E, ...JSON.parse(r.result) }; save(); } catch { toast("Archivo no válido."); } }; r.readAsText(e.target.files[0]); });
+document.addEventListener("keydown", e => { if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === "z" && !/INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName) && hist.length) { e.preventDefault(); restore(hist.length - 1); } });
+render();
+</script>
+</body>
+</html>
